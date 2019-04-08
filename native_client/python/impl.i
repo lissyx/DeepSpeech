@@ -33,7 +33,15 @@ import_array();
   %append_output(SWIG_NewPointerObj(%as_voidptr(*$1), $*1_descriptor, 0));
 }
 
+%extend struct MetadataItem {
+  MetadataItem* __getitem__(size_t i) {
+    return &$self[i];
+  }
+}
+
 %typemap(newfree) char* "DS_FreeString($1);";
+%typemap(newfree) Metadata* "DS_FreeMetadata($1);";
+
 %newobject DS_SpeechToText;
 %newobject DS_IntermediateDecode;
 %newobject DS_FinishStream;

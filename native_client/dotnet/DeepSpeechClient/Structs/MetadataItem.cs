@@ -1,12 +1,22 @@
+using System;
 using System.Runtime.InteropServices;
 
 namespace DeepSpeechClient.Structs
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct MetadataItem
     {
-        public string character;
-        public int timestep; // Position of the character in units of 20ms
-        public float start_time; // Position of the character in seconds
+        /// <summary>
+        /// Native character.
+        /// </summary>
+        public unsafe IntPtr character;
+        /// <summary>
+        /// Position of the character in units of 20ms.
+        /// </summary>
+        public unsafe int timestep;
+        /// <summary>
+        /// Position of the character in seconds.
+        /// </summary>
+        public unsafe float start_time; 
     }
 }

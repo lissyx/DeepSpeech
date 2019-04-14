@@ -1,12 +1,22 @@
+using System;
 using System.Runtime.InteropServices;
 
 namespace DeepSpeechClient.Structs
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Metadata
     {
-        [MarshalAs(UnmanagedType.LPArray, SizeConst=24)] public MetadataItem[] items;
-        public int num_items;
-        public double probability;// Approximated probability (confidence value) for this transcription.
+        /// <summary>
+        /// Native list of items.
+        /// </summary>
+        public unsafe IntPtr items;
+        /// <summary>
+        /// Count of items from the native side.
+        /// </summary>
+        public unsafe int num_items;
+        /// <summary>
+        /// Approximated probability (confidence value) for this transcription.
+        /// </summary>
+        public unsafe double probability;
     }
 }

@@ -37,9 +37,8 @@ namespace DeepSpeechClient
                 uint aBufferSize,
                 uint aSampleRate);
 
-        [DllImport("libdeepspeech.so", CallingConvention = CallingConvention.Cdecl,
-            CharSet = CharSet.Ansi, SetLastError = true)]
-        internal static unsafe extern Metadata DS_SpeechToTextWithMetadata(ModelState** aCtx,
+        [DllImport("libdeepspeech.so", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
+        internal static unsafe extern IntPtr DS_SpeechToTextWithMetadata(ModelState** aCtx,
                  short[] aBuffer,
                 uint aBufferSize,
                 uint aSampleRate);

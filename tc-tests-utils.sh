@@ -327,7 +327,7 @@ run_netframework_inference_tests()
   assert_working_ldc93s1 "${phrase_pbmodel_nolm}" "$?"
 
   set +e
-  phrase_pbmodel_nolm=$(DeepSpeechConsole.exe --model ${TASKCLUSTER_TMP_DIR}/${model_name} --alphabet ${TASKCLUSTER_TMP_DIR}/alphabet.txt --audio ${TASKCLUSTER_TMP_DIR}/LDC93S1.wav --extended yes 2>${TASKCLUSTER_TMP_DIR}/stderr)
+  phrase_pbmodel_nolm=$(DeepSpeechConsole.exe --model ${TASKCLUSTER_TMP_DIR}/${model_name} --alphabet ${TASKCLUSTER_TMP_DIR}/alphabet.txt --audio ${TASKCLUSTER_TMP_DIR}/LDC93S1.wav --extended 2>${TASKCLUSTER_TMP_DIR}/stderr)
   set -e
   assert_working_ldc93s1 "${phrase_pbmodel_nolm}" "$?"
 

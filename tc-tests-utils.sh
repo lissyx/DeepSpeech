@@ -848,7 +848,7 @@ do_deepspeech_netframework_build()
     DeepSpeechClient/DeepSpeechClient.csproj \
     /p:Configuration=Release \
     /p:Platform=x64 \
-    /p:TargetFrameworkVersion="v4.5" \
+    /p:TargetFrameworkVersion="v4.5.2" \
     /p:OutputPath=bin/nuget/x64/v4.5
 
   MSYS2_ARG_CONV_EXCL='/' "${MSBUILD}" \

@@ -234,7 +234,7 @@ namespace DeepSpeechClient
 
             IntPtr incrementalPtr = metaData.items;
             //we need to manually read each item from the native ptr using its size
-            var sizeOfMetaItem = Marshal.SizeOf(typeof(MetadataItem)); 
+            var sizeOfMetaItem = Marshal.SizeOf(typeof(MetadataItem));
             for (int i = 0; i < metaData.num_items; i++)
             {
                 metaDataItems[i] = Marshal.PtrToStructure<MetadataItem>(incrementalPtr);
@@ -247,7 +247,8 @@ namespace DeepSpeechClient
                 //we keep the offset on each read
                 incrementalPtr += sizeOfMetaItem;
             }
-            //TODO: Release native
+
+            FreeMetadata(basePtr);
             return managedMetaObject;
         }
 

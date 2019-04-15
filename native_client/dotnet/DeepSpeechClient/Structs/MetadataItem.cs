@@ -17,6 +17,6 @@ namespace DeepSpeechClient.Structs
         /// <summary>
         /// Position of the character in seconds.
         /// </summary>
-        public unsafe float start_time; 
+        public unsafe float start_time;
     }
 }

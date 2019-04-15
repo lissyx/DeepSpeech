@@ -17,8 +17,7 @@ namespace DeepSpeechClient.Extensions
             while (Marshal.ReadByte(intPtr, len) != 0) ++len;
             byte[] buffer = new byte[len];
             Marshal.Copy(intPtr, buffer, 0, buffer.Length);
-            //TODO: Release native
-            //NativeImp.DS_FreeString(intPtr);
+            NativeImp.DS_FreeString(intPtr);
             string result = Encoding.UTF8.GetString(buffer);
             return result;
         }

@@ -74,7 +74,7 @@ namespace DeepSpeechClient
         internal static unsafe extern IntPtr DS_FinishStream(  StreamingState** aSctx);
 
         [DllImport("libdeepspeech.so", CallingConvention = CallingConvention.Cdecl)]
-        internal static unsafe extern Metadata DS_FinishStreamWithMetadata(  StreamingState** aSctx);
+        internal static unsafe extern IntPtr DS_FinishStreamWithMetadata(StreamingState** aSctx);
         #endregion
     }
 }

@@ -139,9 +139,9 @@ namespace DeepSpeechClient
         /// Closes the ongoing streaming inference, returns the STT result over the whole audio signal.
         /// </summary>
         /// <returns>The extended metadata. The user is responsible for freeing the struct.</returns>
-        public unsafe Metadata FinishStreamWithMetadata()
+        public unsafe Models.Metadata FinishStreamWithMetadata()
         {
-            return NativeImp.DS_FinishStreamWithMetadata(_streamingStatePP);
+            return NativeImp.DS_FinishStreamWithMetadata(_streamingStatePP).PtrToMetadata();
         }
 
         /// <summary>

@@ -4,19 +4,19 @@ using System.Runtime.InteropServices;
 namespace DeepSpeechClient.Structs
 {
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct MetadataItem
+    internal unsafe struct MetadataItem
     {
         /// <summary>
         /// Native character.
         /// </summary>
-        public unsafe IntPtr character;
+        internal unsafe IntPtr character;
         /// <summary>
         /// Position of the character in units of 20ms.
         /// </summary>
-        public unsafe int timestep;
+        internal unsafe int timestep;
         /// <summary>
         /// Position of the character in seconds.
         /// </summary>
-        public unsafe float start_time;
+        internal unsafe float start_time;
     }
 }

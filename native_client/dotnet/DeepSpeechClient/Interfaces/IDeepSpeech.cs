@@ -1,5 +1,4 @@
-﻿using DeepSpeechClient.Structs;
-
+﻿using DeepSpeechClient.Models;
 using System;
 
 namespace DeepSpeechClient.Interfaces
@@ -61,7 +60,7 @@ namespace DeepSpeechClient.Interfaces
         /// <param name="aBufferSize">The number of samples in the audio signal.</param>
         /// <param name="aSampleRate">The sample-rate of the audio signal.</param>
         /// <returns>The extended metadata result. The user is responsible for freeing the struct.  Returns NULL on error.</returns>
-        unsafe Models.Metadata SpeechToTextWithMetadata(short[] aBuffer,
+        unsafe Metadata SpeechToTextWithMetadata(short[] aBuffer,
                 uint aBufferSize,
                 uint aSampleRate);
 

@@ -222,34 +222,7 @@ namespace DeepSpeechClient
         /// <returns>The extended metadata. The user is responsible for freeing the struct.  Returns NULL on error.</returns>
         public unsafe Models.Metadata SpeechToTextWithMetadata(short[] aBuffer, uint aBufferSize, uint aSampleRate)
         {
-            var managedMetaObject = new Models.Metadata();
-
-            var basePtr = NativeImp.DS_SpeechToTextWithMetadata(_modelStatePP, aBuffer, aBufferSize, aSampleRate);
-
-            var metaData = (Metadata)Marshal.PtrToStructure(basePtr, typeof(Metadata));
-
-            var metaDataItems = new MetadataItem[metaData.num_items];
-            managedMetaObject.Items = new Models.MetadataItem[metaData.num_items];
-            managedMetaObject.Probability = metaData.probability;
-
-            IntPtr incrementalPtr = metaData.items;
-            //we need to manually read each item from the native ptr using its size
-            var sizeOfMetaItem = Marshal.SizeOf(typeof(MetadataItem));
-            for (int i = 0; i < metaData.num_items; i++)
-            {
-                metaDataItems[i] = Marshal.PtrToStructure<MetadataItem>(incrementalPtr);
-                managedMetaObject.Items[i] = new Models.MetadataItem
-                {
-                    Timestep = metaDataItems[i].timestep,
-                    StartTime = metaDataItems[i].start_time,
-                    Character = metaDataItems[i].character.PtrToString()
-                };
-                //we keep the offset on each read
-                incrementalPtr += sizeOfMetaItem;
-            }
-
-            FreeMetadata(basePtr);
-            return managedMetaObject;
+            return NativeImp.DS_SpeechToTextWithMetadata(_modelStatePP, aBuffer, aBufferSize, aSampleRate).PtrToMetadata();
         }
 
         #endregion

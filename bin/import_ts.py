@@ -26,7 +26,7 @@ from util.downloader import SIMPLE_BAR
 from os import path
 
 from util.downloader import maybe_download
-from util.text import validate_label
+from util.text import Alphabet, validate_label_fr as validate_label
 from util.feeding import secs_to_hours
 
 FIELDNAMES = ['wav_filename', 'wav_filesize', 'transcript']
@@ -93,7 +93,7 @@ def _maybe_convert_sets(target_dir, extracted_data, english_compatible=False):
         if path.exists(wav_filename):
             file_size = path.getsize(wav_filename)
             frames = int(subprocess.check_output(['soxi', '-s', wav_filename], stderr=subprocess.STDOUT))
-        label = sample['text']
+        label = label_filter(sample['text'])
         with lock:
             if file_size == -1:
                 # Excluding samples that failed upon conversion
@@ -133,7 +133,6 @@ def _maybe_convert_sets(target_dir, extracted_data, english_compatible=False):
                 test_writer.writeheader()
 
                 for i, item in enumerate(rows):
-                    print('item', item)
                     transcript = validate_label(cleanup_transcript(item[2], english_compatible=english_compatible))
                     if not transcript:
                         continue
@@ -189,9 +188,21 @@ def handle_args():
     parser = argparse.ArgumentParser(description='Importer for TrainingSpeech dataset.')
     parser.add_argument(dest='target_dir')
     parser.add_argument('--english-compatible', action='store_true', dest='english_compatible', help='Remove diactrics and other non-ascii chars.')
+    parser.add_argument('--filter_alphabet', help='Exclude samples with characters not in provided alphabet')
     return parser.parse_args()
 
 
 if __name__ == "__main__":
-    cli_args = handle_args()
-    _download_and_preprocess_data(cli_args.target_dir, cli_args.english_compatible)
+    CLI_ARGS = handle_args()
+    ALPHABET = Alphabet(CLI_ARGS.filter_alphabet) if CLI_ARGS.filter_alphabet else None
+
+    def label_filter(label):
+        label = validate_label(label)
+        if ALPHABET and label:
+            try:
+                [ALPHABET.label_from_string(c) for c in label]
+            except KeyError:
+                label = None
+        return label
+
+    _download_and_preprocess_data(CLI_ARGS.target_dir, CLI_ARGS.english_compatible)

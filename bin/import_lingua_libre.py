@@ -27,7 +27,7 @@ from os import path
 from glob import glob
 
 from util.downloader import maybe_download
-from util.text import Alphabet, validate_label
+from util.text import Alphabet, validate_label_fr as validate_label
 from util.feeding import secs_to_hours
 
 FIELDNAMES = ['wav_filename', 'wav_filesize', 'transcript']

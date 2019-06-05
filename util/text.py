@@ -187,3 +187,57 @@ def validate_label(label):
     label = label.lower()
 
     return label if label else None
+
+def validate_label_fr(label):
+    if re.search(r"[0-9]", label) is not None:
+        return None
+
+    if '*' in label:
+        return None
+
+    label = label.replace("=", "")
+    label = label.replace("|", "")
+    label = label.replace("-", " ")
+    label = label.replace("–", " ")
+    label = label.replace("—", " ")
+    label = label.replace("’", " ")
+    label = label.replace("^", "e")
+    #label = label.replace("'", " ")
+    label = label.replace("…", " ")
+    label = label.replace("_", " ")
+    label = label.replace(".", "")
+    label = label.replace(",", "")
+    label = label.replace("?", "")
+    label = label.replace("!", "")
+    label = label.replace("\"", "")
+    label = label.replace("(", "")
+    label = label.replace(")", "")
+    label = label.replace("{", "")
+    label = label.replace("}", "")
+    label = label.replace("/", " ")
+    label = label.replace(":", "")
+    label = label.replace(";", "")
+    label = label.replace("«", "")
+    label = label.replace("»", "")
+    label = label.replace("+", "plus")
+    label = label.replace("β", "beta")
+    label = label.replace("σ", "gamma")
+    label = label.replace("½", "demi")
+    label = label.replace("¼", "quart")
+    label = label.replace("&", "et")
+    label = label.replace("æ", "é")
+    label = label.replace("nºˢ", "numéros")
+    label = label.replace("nº", "numéro")
+    label = label.replace("n°", "numéro")
+    label = label.replace("         ", " ")
+    label = label.replace("        ", " ")
+    label = label.replace("       ", " ")
+    label = label.replace("      ", " ")
+    label = label.replace("     ", " ")
+    label = label.replace("    ", " ")
+    label = label.replace("   ", " ")
+    label = label.replace("  ", " ")
+    label = label.strip()
+    label = label.lower()
+
+    return label if label else None

@@ -203,6 +203,7 @@ def validate_label_fr(label):
     label = label.replace("’", " ")
     label = label.replace("^", "e")
     #label = label.replace("'", " ")
+    label = label.replace("º", " ")
     label = label.replace("…", " ")
     label = label.replace("_", " ")
     label = label.replace(".", "")

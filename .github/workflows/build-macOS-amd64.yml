@@ -1,0 +1,7 @@
+name: "Build macOS amd64"
+on: [push]
+jobs:
+  hello:
+    runs-on: ubuntu-18.04
+    steps:
+      - run: echo "Hello world"
